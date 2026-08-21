@@ -1,0 +1,28 @@
+package com.example.taskmanagement.entity;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
+import lombok.Data;
+
+import java.util.List;
+
+@Entity
+@Table(name = "users")
+@Data
+public class User {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String name;
+
+    @Column(unique = true, nullable = false)
+    private String email;
+
+    private String password;
+
+    @OneToMany(mappedBy = "user")
+    @JsonIgnore
+    private List<Task> tasks;
+}
